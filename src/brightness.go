@@ -42,10 +42,10 @@ func getCurrent(path string) int {
 	return getBrightnessValue(path)
 }
 
-func getCurrentBrightness(path string, max_path string) (int, int) { // Return percentage, max.
+func getCurrentBrightness(path string, max_path string) (int, int) {
 	current_brightness := getCurrent(path)
 	max_brightness := getMax(max_path)
-	percent := int((float64(current_brightness) / float64(max_brightness)) * 100)
+	percent := int(math.Round((float64(current_brightness) / float64(max_brightness) * 100)))
 	return percent, max_brightness
 }
 
@@ -103,20 +103,20 @@ func main() {
 	fmt.Printf("Current brightness: %d%%\n", percent)
 	fmt.Printf("Current keyboard brightness: %d%%\n", percent_kbd)
 	if len(args) > 0 {
-		cmd := args[0]
-		if strings.ToUpper(cmd) == "UP" {
-			setBrightness(true, true)
-		} else if strings.ToUpper(cmd) == "DOWN" {
-			setBrightness(true, false)
-		} else if strings.ToUpper(cmd) == "--KBD" && len(args) > 1 {
-			cmd2 := args[1]
-			if strings.ToUpper(cmd2) == "UP" {
-				setBrightness(false, true)
-			} else if strings.ToUpper(cmd2) == "DOWN" {
-				setBrightness(false, false)
+		cmd := strings.ToUpper(args[0])
+		backlight := true
+		if cmd == "--KBD" {
+			if len(args) > 1 {
+				backlight = false
+				cmd = strings.ToUpper(args[1])
 			} else {
-				fmt.Printf("Invalid command: %s %s\n", cmd, cmd2)
+				fmt.Println("Not enough arguments given.")
 			}
+		}
+		if cmd == "UP" {
+			setBrightness(backlight, true)
+		} else if cmd == "DOWN" {
+			setBrightness(backlight, false)
 		} else {
 			fmt.Printf("Invalid command: %s\n", cmd)
 		}

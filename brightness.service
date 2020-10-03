@@ -1,0 +1,8 @@
+[Unit]
+Description=brightness permission script
+
+[Service]
+ExecStart=/home/alex/brightness/permissions.sh
+
+[Install]
+WantedBy=multi-user.target

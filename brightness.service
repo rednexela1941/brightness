@@ -1,7 +1,10 @@
 [Unit]
 Description=brightness permission script
+ConditionUser=!root
+After=systemd-backlight@backlight:acpi_video0.service systemd-backlight@backlight:intel_backlight.service systemd-backlight@leds:smc::kbd_backlight.service
 
 [Service]
+Type=onshot
 ExecStart=/home/alex/brightness/permissions.sh
 
 [Install]

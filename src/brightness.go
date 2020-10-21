@@ -56,7 +56,7 @@ func setBrightness(backlight bool, up bool) {
 	var min float64
 
 	if backlight {
-		min = 20
+		min = 5
 		path = BRIGHTNESS_PATH
 		percent, max = getCurrentBrightness(BRIGHTNESS_PATH, MAX_BRIGHTNESS_PATH)
 	} else {

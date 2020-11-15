@@ -76,7 +76,7 @@ func setBrightness(backlight bool, up bool) {
 		new_val -= percent_increment
 	}
 
-	new_val = int(math.Max(min, float64(new_val))) // Set minimum brightness to 20%
+	new_val = int(math.Max(min, float64(new_val)))
 	new_val = int(math.Min(100, float64(new_val)))
 	new_percent := new_val
 	new_val = int((float64(new_val) / 100) * float64(max))
@@ -121,7 +121,6 @@ func main() {
 			fmt.Printf("Invalid command: %s\n", cmd)
 		}
 	} else {
-
 		fmt.Println("No arguments supplied: up, or down.")
 	}
 

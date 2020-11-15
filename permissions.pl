@@ -22,6 +22,7 @@ sub main {
                 last;
             }
         }
+		sleep(1);
     }
     $fail_count = 0;
     while ( $fail_count < 10 ) {
@@ -33,6 +34,7 @@ sub main {
                 last;
             }
         }
+		sleep(1);
     }
     print("Done\n");
 }

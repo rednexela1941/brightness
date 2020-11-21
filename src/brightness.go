@@ -9,10 +9,14 @@ import (
 	"strings"
 )
 
-const MAX_BRIGHTNESS_PATH = "/sys/class/backlight/intel_backlight/max_brightness"
-const BRIGHTNESS_PATH = "/sys/class/backlight/intel_backlight/brightness"
-const MAX_KEYBOARD_BRIGHTNESS_PATH = "/sys/class/leds/smc::kbd_backlight/max_brightness"
-const KEYBOARD_BRIGHTNESS_PATH = "/sys/class/leds/smc::kbd_backlight/brightness"
+//const MAX_BRIGHTNESS_PATH = "/sys/class/backlight/intel_backlight/max_brightness"
+const MAX_BRIGHTNESS_PATH = "/sys/class/backlight/gmux_backlight/max_brightness"
+//const BRIGHTNESS_PATH = "/sys/class/backlight/intel_backlight/brightness"
+const BRIGHTNESS_PATH = "/sys/class/backlight/gmux_backlight/brightness"
+//const MAX_KEYBOARD_BRIGHTNESS_PATH = "/sys/class/leds/smc::kbd_backlight/max_brightness"
+const MAX_KEYBOARD_BRIGHTNESS_PATH = "/sys/class/leds/spi::kbd_backlight/max_brightness"
+//const KEYBOARD_BRIGHTNESS_PATH = "/sys/class/leds/smc::kbd_backlight/brightness"
+const KEYBOARD_BRIGHTNESS_PATH = "/sys/class/leds/spi::kbd_backlight/brightness"
 
 func check(e error) {
 	if e != nil {
@@ -56,7 +60,7 @@ func setBrightness(backlight bool, up bool) {
 	var min float64
 
 	if backlight {
-		min = 20
+		min = 10
 		path = BRIGHTNESS_PATH
 		percent, max = getCurrentBrightness(BRIGHTNESS_PATH, MAX_BRIGHTNESS_PATH)
 	} else {
